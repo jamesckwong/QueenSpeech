@@ -97,9 +97,7 @@ namespace Queen_s_Speech
 
 
 
-                        //var sortedDict = (from entry in dictionary orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-                        //int count = 1;
-                        //Console.WriteLine("- " + filename + " ----");
+                        
                         Console.WriteLine();
                         foreach (KeyValuePair<string, int> pair in dictionary)
                         {
@@ -133,7 +131,92 @@ namespace Queen_s_Speech
 
 
             }
+            //CP loop ( foreach pair in condict  )
+            //unique words = dictionary.count
+            //total number of words = *myDict.Sum(x => x.Value); *
+            // word frequency = word.value
 
+            //word frequency +1 / total number of words + unique words(conditional probability is this)
+
+            //concp.add(word, condi)
+            Dictionary<string, double> conCP = new Dictionary<string, double>();
+            Dictionary<string, double> coaCP = new Dictionary<string, double>();
+            Dictionary<string, double> labCP = new Dictionary<string, double>();
+
+
+            foreach ( var pair in conDict )
+            {
+                int uniqueWords = conDict.Count();
+                int totalNumberOfWords = conDict.Sum(x => x.Value);
+                int wordFrequency = pair.Value;
+
+                double cp =(wordFrequency + 1) / (totalNumberOfWords + uniqueWords);
+                conCP.Add(pair.Key, cp);
+
+            }
+
+            foreach (var pair in coaDict)
+            {
+                int uniqueWords = coaDict.Count();
+                int totalNumberOfWords = coaDict.Sum(x => x.Value);
+                int wordFrequency = pair.Value;
+
+                double cp = (wordFrequency + 1) / (totalNumberOfWords + uniqueWords);
+                conCP.Add(pair.Key, cp);
+
+            }
+
+            foreach (var pair in labDict)
+            {
+                int uniqueWords = labDict.Count();
+                int totalNumberOfWords = labDict.Sum(x => x.Value);
+                int wordFrequency = pair.Value;
+
+                double cp = (wordFrequency + 1) / (totalNumberOfWords + uniqueWords);
+                conCP.Add(pair.Key, cp);
+
+            }
+            //dictionary with test file words
+            
+            
+
+            Console.WriteLine("Enter path to test file.");
+
+            string input = Console.ReadLine();
+
+            Dictionary<string, int> testdictionary = new Dictionary<string, int>();
+
+            string testtext = System.IO.File.ReadAllText(input); //Read file 
+            testtext = testtext.ToLower(); //Convert our input to lowercase 
+
+            List<string> wordList = testtext.Split(' ').ToList();
+
+
+            foreach (var word in wordList)
+            {
+                if (testdictionary.ContainsKey(word))
+                {
+                    testdictionary[word]++;
+                }
+                else
+                {
+                    testdictionary.Add(word, 1);
+                }
+            }
+
+
+
+
+
+        double coaLog = 0F;
+        double conLog = 0F;
+        double labLog = 0F;
+            foreach (var word in testdictionary) ;
+
+            if (coaDict.ContainsKey(Word.Value))
+            {
+                coaLog += Math.Log(Math.Pow(coaDict(word), 
+            }
 
         
 
@@ -141,14 +224,8 @@ namespace Queen_s_Speech
 
 
 
-
-
-
-
-
-
-        }
-    }
+                    }
+                }
 }
 
 
